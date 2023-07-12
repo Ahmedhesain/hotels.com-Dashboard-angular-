@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "trivago-215f0": {
+      "hosting": {
+        "adminDashBoard": [
+          "trivago-215f0"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "trivago-215f0"
+  }
+}
