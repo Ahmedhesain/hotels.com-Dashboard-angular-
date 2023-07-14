@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,8 +10,11 @@ import { Observable } from 'rxjs';
 export class CitiesComponent {
 
   cities!: Observable<any>;
+  id : string = '';
   name !: string  ;
+  nameAR !: string;
   img !: string ;
+
 
   constructor(private firestore : Firestore){
     this.getCitiess();
@@ -27,10 +30,12 @@ export class CitiesComponent {
   }
 
   saveCity(){
+    if (this.id == ''){
     const collectionInstance = collection (this.firestore ,"cities");
-    if (this.name !=''&& this.img !=''){
+    if (this.name !=''&& this.img !=''&& this.nameAR!=''){
       addDoc(collectionInstance , {
         name : this.name ,
+        nameAR : this.nameAR ,
         img : this.img
       }).then(() => {
         console.log('city saved');
@@ -39,8 +44,18 @@ export class CitiesComponent {
         console.log(err);
 
       });
+
     }
-    this.resetData();
+  } else {
+    const docInstance = doc(this.firestore ,"cities" ,this.id);
+    updateDoc(docInstance , {
+      name : this.name ,
+      nameAR : this.nameAR ,
+      img : this.img
+    });
+  }
+  this.resetData();
+
   }
   deleteCity(id:string){
     const docInstance = doc(this.firestore ,"cities" ,id);
@@ -50,9 +65,20 @@ export class CitiesComponent {
       console.log(err);
     })
   }
+
   resetData(){
+    this.id ='';
     this.name = '';
+    this.nameAR = '';
     this.img = '';
+  }
+
+  fulFillData(data :any){
+    this.id = data.id;
+    this.name = data.name;
+    this.nameAR = data.nameAR;
+    this.img = data.img;
+
   }
 
 }

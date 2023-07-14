@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, updateDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,7 +10,9 @@ import { Observable } from 'rxjs';
 export class AdsComponent {
 
   ads!: Observable<any>;
-  name !: string;
+  id : string = '';
+  name !: string  ;
+  nameAR !: string;
   img !: string;
 
   constructor(private firestore : Firestore){
@@ -27,10 +29,12 @@ export class AdsComponent {
     })
   }
   saveAds(){
+    if (this.id == ''){
     const collectionInstance = collection (this.firestore ,"ads");
-    if (this.name !=''&& this.img !=''){
+    if (this.name !=''&& this.img !='' && this.nameAR!=''){
       addDoc(collectionInstance , {
         name : this.name ,
+        nameAR : this.nameAR ,
         img : this.img
       }).then(() => {
         console.log('ads saved');
@@ -40,7 +44,18 @@ export class AdsComponent {
 
       });
     }
-    this.resetData();
+  }
+    else {
+      const docInstance = doc(this.firestore ,"ads" ,this.id);
+    updateDoc(docInstance , {
+      name : this.name ,
+      nameAR : this.nameAR ,
+      img : this.img
+    });
+    }
+     this.resetData();
+
+
   }
   deleteAds(id:string){
     const docInstance = doc(this.firestore ,"ads" ,id);
@@ -51,7 +66,16 @@ export class AdsComponent {
     })
   }
   resetData(){
+    this.id ='';
     this.name = '';
+    this.nameAR = '';
     this.img = '';
+  }
+  fulFillData(data :any){
+    this.id = data.id;
+    this.name = data.name;
+    this.nameAR = data.nameAR;
+    this.img = data.img;
+
   }
 }

@@ -7,7 +7,9 @@
               <th>Name</th>
               <th>Email</th>
               <th>Price</th>
-              <th>Image</th>
+              <th>check-in</th>
+              <th>check-out</th>
+
           </tr>
       </thead>
       <tbody>
@@ -15,7 +17,10 @@
           <td>{{data.name}}</td>
           <td>{{data.email}}</td>
           <td>{{data.price}}</td>
-          <td><img src={{data.img}} width="200px" alt="Order image"></td>
+          <td>{{data.checkIn}}</td>
+          <td>{{data.checkOut}}</td>
+
+          <!-- <td><img src={{data.img}} width="200px" alt="Order image"></td> -->
         </tr>
       </tbody>
   </table>

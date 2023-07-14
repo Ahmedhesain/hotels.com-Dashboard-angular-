@@ -4,7 +4,7 @@
     <div class="col-lg-3 col-sm-6 mb-3 ">
       <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
         <div>
-          <h3>720</h3>
+          <h3>20</h3>
           <p>Users</p>
         </div>
         <i class="fa-solid fa-users fs-1 text-white border rounded-circle bg-info p-3"></i>
@@ -56,7 +56,7 @@
           </tr>
       </table>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-8">
       <h2> Orders</h2>
       <table class="table table-white border table-hover">
         <thead>
@@ -64,7 +64,9 @@
             <th scope="col">Name</th>
             <th scope="col">Email</th>
             <th scope="col">Price</th>
-            <!-- <th scope="col">Image</th> -->
+            <th scope="col-lg-2">check-in</th>
+            <th scope="col-lg-2">check-out</th>
+
           </tr>
         </thead>
         <tbody>
@@ -72,6 +74,9 @@
             <td>{{data.name}}</td>
             <td>{{data.email}}</td>
             <td>{{data.price}}</td>
+            <td>{{data.checkIn}}</td>
+            <td>{{data.checkOut}}</td>
+
             <!-- <td><img src={{data.img}} width="200px" alt="Order image"></td> -->
           </tr>
       </table>

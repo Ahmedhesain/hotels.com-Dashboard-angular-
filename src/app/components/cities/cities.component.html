@@ -8,14 +8,16 @@
       <div class="form-group row">
         <label for="ID" class="col-sm-2 col-form-label">ID</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="ID" placeholder="ID" readonly />
+          <input type="text" class="form-control" id="ID" placeholder="ID" [(ngModel)]="id" readonly />
         </div>
       </div>
       <br />
       <div class="form-group row">
-        <label for="Name" class="col-sm-2 col-form-label">Name</label>
+        <label for="Name" class="col-sm-2 col-form-label">Name AR</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="Name" placeholder="Name"  [(ngModel)]="name" required />
+          <input  type="text" class="form-control" id="Name" placeholder="Name"  [(ngModel)]="name" required />
+          <input  type="text" class="form-control mt-2" id="NameAR" placeholder="Name ARABIC"  [(ngModel)]="nameAR" required />
+
         </div>
       </div>
       <!-- <h1>{{img}}  {{name}}</h1> -->
@@ -54,8 +56,10 @@
             <td><img src={{data.img}} style="width: 15rem;;" alt="Order image"></td>
             <td>{{data.id}}</td>
             <td><button type="button" class="btn btn-danger" (click)="deleteCity(data.id)" >
-              del
-            </button></td>
+              <i class="fa-solid fa-trash"></i>
+            </button> |
+          <button type="button" class="btn btn-warning" (click)="fulFillData(data)" >
+            <i class="fa-solid fa-pen-to-square"></i></button></td>
           </tr>
         </tbody>
       </table>
